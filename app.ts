@@ -1,8 +1,9 @@
-import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
+import { Application } from "./mod.ts";
 
-console.log("Listening on http://localhost:8000");
-serve((_req) => {
-  return new Response("Hello World!", {
-    headers: { "content-type": "text/plain" },
-  });
+const app = new Application();
+
+app.use((ctx) => {
+  ctx.response.body = "Hello World!";
 });
+
+await app.listen({ port: 8000 });
